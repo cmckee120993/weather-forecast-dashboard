@@ -10,19 +10,24 @@ submit.on('click', function(event) {
     let currentCity = localStorage.getItem('currentCity');
     $('.search-history').append($(`<li>${currentCity}</li>`));
 
-    // Taking localStorage to the weather api for current conditions
+    // Taking localStorage to a geocode API for longitude/lattitude
 
     let currentConditions = function(event) {
-    let currentAPI = 'YTg0OTY5YTdlOTI2NDE5ODk4MzE0ZmViMThmNmIyMmU6YjQzYjhkMWYtODVhMi00M2Y0LTk4NzktNmU1ZThjMzdhYjhj';
-    let currentURL = 'https://api.myptv.com/geocoding/v1/locations/by-text?searchText='+ currentCity + '&apiKey=YTg0OTY5YTdlOTI2NDE5ODk4MzE0ZmViMThmNmIyMmU6YjQzYjhkMWYtODVhMi00M2Y0LTk4NzktNmU1ZThjMzdhYjhj';
+    let currentAPI = 'G27KXPH8JLYLLD4AT9EQQCZ9K'
+    let currentURL = 'https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/'+ currentCity +'?unitGroup=us&key=' + currentAPI +'&contentType=json';
+    
     fetch(currentURL)
     .then(function(response) {
         console.log(response);
         return response.json();})
-        .then(function(data) {
-            console.log(data);
+        .then(function(response) {
+            console.log(response);
         });
+        
 }
 currentConditions()
+
+
+
 });
 
