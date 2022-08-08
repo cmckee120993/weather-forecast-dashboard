@@ -18,10 +18,18 @@ submit.on('click', function(event) {
     
     fetch(currentURL)
     .then(function(response) {
-        console.log(response);
         return response.json();})
-        .then(function(response) {
-            console.log(response);
+        .then(function(data) {
+            // Populating current conditions on HTML
+            let tempEl = $('#temp');
+            let windEl = $('#wind');
+            let humidEl = $('#humid');
+            let indexEl = $('#index');
+
+            tempEl.text('Temp: '+ data.currentConditions.temp);
+            windEl.text('Wind: '+ data.currentConditions.windspeed);
+            humidEl.text('Humidity: '+ data.currentConditions.humidity);
+            indexEl.text('UV Index: '+ data.currentConditions.uvindex);
         });
         
 }
