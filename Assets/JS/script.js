@@ -26,19 +26,54 @@ submit.on('click', function(event) {
             let windEl = $('#wind');
             let humidEl = $('#humid');
             let indexEl = $('#index');
+            let conditionsEl = $('#conditions');
 
             tempEl.text('Temp: '+ data.currentConditions.temp);
             windEl.text('Wind: '+ data.currentConditions.windspeed);
             humidEl.text('Humidity: '+ data.currentConditions.humidity);
             indexEl.text('UV Index: '+ data.currentConditions.uvindex);
 
+            if (data.currentConditions.conditions === 'Clear') {
+                conditionsEl.text('🔆')
+            } else if (data.currentConditions.conditions === 'Partially cloudy') {
+                conditionsEl.text('🌤')
+            } else if (data.currentConditions.conditions === 'Rain, partially cloudy') {
+                conditionsEl.text('🌦')
+            } else if (data.currentConditions.conditions === 'Rain') {
+                conditionsEl.text('🌧')
+            } else if (data.currentConditions.conditions === 'Snow') {
+                conditionsEl.text('🌨')
+            } else if (data.currentConditions.conditions === 'Thunderstorm') {
+                conditionsEl.text('⛈')
+            } else {
+                conditionsEl.text('')
+            };
+
             // Populating the five-day forecast: Day 1
             let dayOne = $('#day-one');
             let dayOneTemp = data.days[1].temp;
             let dayOneHum = data.days[1].humidity;
             let dayOneWind = data.days[1].windspeed;
-
-             
+            let dayOneCondEl =$('#day-one-cond');
+            let dayOneConditions = data.days[1].conditions;
+                
+                if (dayOneConditions === 'Clear') {
+                    dayOneCondEl.text('🔆')
+                } else if (dayOneConditions === 'Partially cloudy') {
+                    dayOneCondEl.text('🌤')
+                } else if (dayOneConditions === 'Rain, partially cloudy') {
+                    dayOneCondEl.text('🌦')
+                } else if (dayOneConditions === 'Rain') {
+                    dayOneCondEl.text('🌧')
+                } else if (dayOneConditions === 'Snow') {
+                    dayOneCondEl.text('🌨')
+                } else if (dayOneConditions === 'Thunderstorm') {
+                    dayOneCondEl.text('⛈')
+                } else {
+                    dayOneCondEl.text('conditions')
+                };
+            
+            // dayOne.append($(`<li>${dayOneConditionsImg}</li>`)) 
             dayOne.append($(`<li>Temp: ${dayOneTemp}</li>`));
             dayOne.append($(`<li>Windspeed: ${dayOneWind}</li>`));
             dayOne.append($(`<li>Humidty: ${dayOneHum}</li>`));
