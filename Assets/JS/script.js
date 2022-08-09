@@ -78,7 +78,7 @@ submit.on('click', function(event) {
             let dayOneWind = data.days[1].windspeed;
             let dayOneCondEl = $('<li></li>');
             let dayOneConditions = data.days[1].conditions;
-            console.log(dayOneConditions);
+            let dayOneDate = moment().add(1, 'day').format('MM-DD-YY');
                 
                 if (dayOneConditions === 'Clear') {
                     dayOneCondEl.text('🔆')
@@ -95,7 +95,7 @@ submit.on('click', function(event) {
                 } else {
                     dayOneCondEl.text('Conditions Unknown')
                 };
-
+            dayOne.append($(`<li id="date">${dayOneDate}</li>`));
             dayOne.append(dayOneCondEl);
             dayOne.append($(`<li>Temp: ${dayOneTemp}</li>`));
             dayOne.append($(`<li>Windspeed: ${dayOneWind}</li>`));
@@ -107,6 +107,7 @@ submit.on('click', function(event) {
             let dayTwoWind = data.days[2].windspeed;
             let dayTwoCondEl =$('<li></li>');
             let dayTwoConditions = data.days[1].conditions;
+            let dayTwoDate = moment().add(2, 'days').format('MM-DD-YY')
                 
                 if (dayTwoConditions === 'Clear') {
                     dayTwoCondEl.text('🔆')
@@ -123,11 +124,12 @@ submit.on('click', function(event) {
                 } else {
                     dayTwoCondEl.text('Conditions Unknown')
                 };
-            
+
+            dayTwo.append($(`<li id="date">${dayTwoDate}</li>`));
             dayTwo.append(dayTwoCondEl);
-             dayTwo.append($(`<li>Temp: ${dayTwoTemp}</li>`));
-             dayTwo.append($(`<li>Windspeed: ${dayTwoWind}</li>`));
-             dayTwo.append($(`<li>Humidty: ${dayTwoHum}</li>`));
+            dayTwo.append($(`<li>Temp: ${dayTwoTemp}</li>`));
+            dayTwo.append($(`<li>Windspeed: ${dayTwoWind}</li>`));
+            dayTwo.append($(`<li>Humidty: ${dayTwoHum}</li>`));
 
               // Populating the five-day forecast: Day 3
             let dayThreeTemp = data.days[3].temp;
@@ -135,6 +137,7 @@ submit.on('click', function(event) {
             let dayThreeWind = data.days[3].windspeed;
             let dayThreeCondEl =$('<li></li>');
             let dayThreeConditions = data.days[3].conditions;
+            let dayThreeDate = moment().add(3, 'days').format('MM-DD-YY');
                 
                 if (dayThreeConditions === 'Clear') {
                     dayThreeCondEl.text('🔆')
@@ -152,6 +155,7 @@ submit.on('click', function(event) {
                     dayThreeCondEl.text('Conditions Unknown')
                 };
 
+            dayThree.append($(`<li id="date">${dayThreeDate}</li>`));
             dayThree.append(dayThreeCondEl);
             dayThree.append($(`<li>Temp: ${dayThreeTemp}</li>`));
             dayThree.append($(`<li>Windspeed: ${dayThreeWind}</li>`));
@@ -163,6 +167,7 @@ submit.on('click', function(event) {
             let dayFourWind = data.days[4].windspeed;
             let dayFourCondEl =$('<li></li>');
             let dayFourConditions = data.days[4].conditions;
+            let dayFourDate = moment().add(4, 'days').format('MM-DD-YY')
                 
                 if (dayFourConditions === 'Clear') {
                     dayFourCondEl.text('🔆')
@@ -180,6 +185,7 @@ submit.on('click', function(event) {
                     dayFourCondEl.text('Conditions Unknown')
                 };
 
+            dayFour.append($(`<li id="date">${dayFourDate}</li>`));
             dayFour.append(dayFourCondEl);
             dayFour.append($(`<li>Temp: ${dayFourTemp}</li>`));
             dayFour.append($(`<li>Windspeed: ${dayFourWind}</li>`));
@@ -191,6 +197,7 @@ submit.on('click', function(event) {
             let dayFiveWind = data.days[5].windspeed;
             let dayFiveCondEl =$('<li></li>');
             let dayFiveConditions = data.days[5].conditions;
+            let dayFiveDate = moment().add(5, 'days').format('MM-DD-YY')
                 
                 if (dayFiveConditions === 'Clear') {
                     dayFiveCondEl.text('🔆')
@@ -207,6 +214,8 @@ submit.on('click', function(event) {
                 } else {
                     dayFiveCondEl.text('Conditions Unknown')
                 };
+
+            dayFive.append($(`<li id="date">${dayFiveDate}</li>`));
             dayFive.append(dayFiveCondEl);
             dayFive.append($(`<li>Temp: ${dayFiveTemp}</li>`));
             dayFive.append($(`<li>Windspeed: ${dayFiveWind}</li>`));
