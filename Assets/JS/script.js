@@ -46,7 +46,7 @@ submit.on('click', function(event) {
             } else if (data.currentConditions.conditions === 'Thunderstorm') {
                 conditionsEl.text('⛈')
             } else {
-                conditionsEl.text('')
+                conditionsEl.text('Conditions Unknown')
             };
 
             // Populating the five-day forecast: Day 1
@@ -70,20 +70,36 @@ submit.on('click', function(event) {
                 } else if (dayOneConditions === 'Thunderstorm') {
                     dayOneCondEl.text('⛈')
                 } else {
-                    dayOneCondEl.text('conditions')
+                    dayOneCondEl.text('Conditions Unknown')
                 };
-            
-            // dayOne.append($(`<li>${dayOneConditionsImg}</li>`)) 
+             
             dayOne.append($(`<li>Temp: ${dayOneTemp}</li>`));
             dayOne.append($(`<li>Windspeed: ${dayOneWind}</li>`));
             dayOne.append($(`<li>Humidty: ${dayOneHum}</li>`));
 
              // Populating the five-day forecast: Day 2
-             let dayTwo = $('#day-two');
-             let dayTwoTemp = data.days[2].temp;
-             let dayTwoHum = data.days[2].humidity;
-             let dayTwoWind = data.days[2].windspeed;
- 
+            let dayTwo = $('#day-two');
+            let dayTwoTemp = data.days[2].temp;
+            let dayTwoHum = data.days[2].humidity;
+            let dayTwoWind = data.days[2].windspeed;
+            let dayTwoCondEl =$('#day-two-cond');
+            let dayTwoConditions = data.days[1].conditions;
+                
+                if (dayTwoConditions === 'Clear') {
+                    dayTwoCondEl.text('🔆')
+                } else if (dayTwoConditions === 'Partially cloudy') {
+                    dayTwoCondEl.text('🌤')
+                } else if (dayTwoConditions === 'Rain, partially cloudy') {
+                    dayTwoCondEl.text('🌦')
+                } else if (dayTwoConditions === 'Rain') {
+                    dayTwoCondEl.text('🌧')
+                } else if (dayTwoConditions === 'Snow') {
+                    dayTwoCondEl.text('🌨')
+                } else if (dayTwoConditions === 'Thunderstorm') {
+                    dayTwoCondEl.text('⛈')
+                } else {
+                    dayTwoCondEl.text('Conditions Unknown')
+                };
               
              dayTwo.append($(`<li>Temp: ${dayTwoTemp}</li>`));
              dayTwo.append($(`<li>Windspeed: ${dayTwoWind}</li>`));
@@ -94,6 +110,24 @@ submit.on('click', function(event) {
             let dayThreeTemp = data.days[3].temp;
             let dayThreeHum = data.days[3].humidity;
             let dayThreeWind = data.days[3].windspeed;
+            let dayThreeCondEl =$('#day-three-cond');
+            let dayThreeConditions = data.days[3].conditions;
+                
+                if (dayThreeConditions === 'Clear') {
+                    dayThreeCondEl.text('🔆')
+                } else if (dayThreeConditions === 'Partially cloudy') {
+                    dayThreeCondEl.text('🌤')
+                } else if (dayThreeConditions === 'Rain, partially cloudy') {
+                    dayThreeCondEl.text('🌦')
+                } else if (dayThreeConditions === 'Rain') {
+                    dayThreeCondEl.text('🌧')
+                } else if (dayThreeConditions === 'Snow') {
+                    dayThreeCondEl.text('🌨')
+                } else if (dayThreeConditions === 'Thunderstorm') {
+                    dayThreeCondEl.text('⛈')
+                } else {
+                    dayThreeCondEl.text('Conditions Unknown')
+                };
 
              
             dayThree.append($(`<li>Temp: ${dayThreeTemp}</li>`));
@@ -105,6 +139,24 @@ submit.on('click', function(event) {
             let dayFourTemp = data.days[4].temp;
             let dayFourHum = data.days[4].humidity;
             let dayFourWind = data.days[4].windspeed;
+            let dayFourCondEl =$('#day-four-cond');
+            let dayFourConditions = data.days[4].conditions;
+                
+                if (dayFourConditions === 'Clear') {
+                    dayFourCondEl.text('🔆')
+                } else if (dayFourConditions === 'Partially cloudy') {
+                    dayFourCondEl.text('🌤')
+                } else if (dayFourConditions === 'Rain, partially cloudy') {
+                    dayFourCondEl.text('🌦')
+                } else if (dayFourConditions === 'Rain') {
+                    dayFourCondEl.text('🌧')
+                } else if (dayFourConditions === 'Snow') {
+                    dayFourCondEl.text('🌨')
+                } else if (dayFourConditions === 'Thunderstorm') {
+                    dayFourCondEl.text('⛈')
+                } else {
+                    dayFourCondEl.text('Conditions Unknown')
+                };
 
              
             dayFour.append($(`<li>Temp: ${dayFourTemp}</li>`));
@@ -116,7 +168,24 @@ submit.on('click', function(event) {
             let dayFiveTemp = data.days[5].temp;
             let dayFiveHum = data.days[5].humidity;
             let dayFiveWind = data.days[5].windspeed;
-
+            let dayFiveCondEl =$('#day-five-cond');
+            let dayFiveConditions = data.days[5].conditions;
+                
+                if (dayFiveConditions === 'Clear') {
+                    dayFiveCondEl.text('🔆')
+                } else if (dayFiveConditions === 'Partially cloudy') {
+                    dayFiveCondEl.text('🌤')
+                } else if (dayFiveConditions === 'Rain, partially cloudy') {
+                    dayFiveCondEl.text('🌦')
+                } else if (dayFiveConditions === 'Rain') {
+                    dayFiveCondEl.text('🌧')
+                } else if (dayFiveConditions === 'Snow') {
+                    dayFiveCondEl.text('🌨')
+                } else if (dayFiveConditions === 'Thunderstorm') {
+                    dayFiveCondEl.text('⛈')
+                } else {
+                    dayFiveCondEl.text('Conditions Unknown')
+                };
              
             dayFive.append($(`<li>Temp: ${dayFiveTemp}</li>`));
             dayFive.append($(`<li>Windspeed: ${dayFiveWind}</li>`));
