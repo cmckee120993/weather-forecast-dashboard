@@ -24,7 +24,7 @@ submit.on('click', function(event) {
     $(this).siblings('#city').val('');
     let cityHistory = $('.search-history');
     let currentCity = localStorage.getItem('currentCity');
-    $('.search-history').append($(`<li>${currentCity}</li>`));
+    $('.search-history').append($(`<li id='city-history'>${currentCity}</li>`));
 
     // Taking localStorage to a geocode API for longitude/lattitude
 
@@ -221,9 +221,11 @@ submit.on('click', function(event) {
             dayFive.append($(`<li>Windspeed: ${dayFiveWind}</li>`));
             dayFive.append($(`<li>Humidty: ${dayFiveHum}</li>`));
         })
-        } 
-        weatherConditions()
+        } ;
+        weatherConditions()  
+
 });
+
 
 
 
