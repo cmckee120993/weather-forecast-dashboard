@@ -1,22 +1,14 @@
 // Submit button and user input 
 let submit = $('.btn');
 
-// Day elements
-let dayOne = $('#day-one');
-let dayTwo = $('#day-two');
-let dayThree = $('#day-three');
-let dayFour = $('#day-four');
-let dayFive = $('#day-five');
+// Five-day forecast div used to clear old data upon a new search
+let forecastDiv =$('.five-day');
 
 // Search button for query
 submit.on('click', function(event) {
 
     // Clearing previous search five-day forecast (if any)
-    dayOne.empty();
-    dayTwo.empty();
-    dayThree.empty();
-    dayFour.empty();
-    dayFive.empty();
+    forecastDiv.empty();
 
     // Getting user input and sending it to storage
     let userInput = $(this).siblings('#city').val();
@@ -89,193 +81,37 @@ submit.on('click', function(event) {
             let dayHum = data.days[i].humidity;
             let dayWind = data.days[i].windspeed;
             let dayConditions = data.days[i].conditions;
-            let dayConditionsEl = $('<li>emoji</li>')
+            let dayConditionsEl = $('<li></li>');
             let dayDate = moment().add(1, 'day').format('MM/DD/YY');
             
             if (dayConditions === 'Clear') {
                 dayConditionsEl.text('🔆')
                 } else if (dayConditions === 'Partially cloudy') {
-                    dayConditionsEl.text('🌤')
+                    dayConditionsEl.text('🌤');
                 } else if (dayConditions === 'Rain, Partially cloudy') {
-                    dayConditionsEl.text('🌦')
+                    dayConditionsEl.text('🌦');
                 } else if (dayConditions === 'Rain') {
-                    dayConditionsEl.text('🌧')
+                    dayConditionsEl.text('🌧');
                 } else if (dayConditions === 'Snow') {
-                    dayConditionsEl.text('🌨')
+                    dayConditionsEl.text('🌨');
                 } else if (dayConditions === 'Thunderstorm') {
-                    dayConditionsEl.text('⛈')
+                    dayConditionsEl.text('⛈');
                 } else {
-                    dayConditionsEl.text('Conditions Unknown')
+                    dayConditionsEl.text('Conditions Unknown');
                 };
+
+                console.log(dayConditionsEl);
             
             // Creating HTML list for array
             let fiveDayForecast = $(`<div id='day'>
                     <ul>
                         <li>${dayDate}</li>
-                        <li>${dayConditionsEl}</li>
+                        ${dayConditionsEl[0].innerHTML}
                         <li>Temp: ${dayTemp}</li>
                         <li>Humidity: ${dayHum}</li>
                         <li>Windspeed: ${dayWind}</li>
                     </ul>`);
 
             // Accessing div and appending forecast to HTML
-            let forecastDiv =$('.five-day');
-            
             forecastDiv.append(fiveDayForecast);
-            
-                //     dayOne.append($(`<li id="date">${dayOneDate}</li>`));
-                //     dayOne.append(dayOneCondEl);
-                //     dayOne.append($(`<li>Temp: ${dayOneTemp}</li>`));
-                //     dayOne.append($(`<li>Windspeed: ${dayOneWind}</li>`));
-                //     dayOne.append($(`<li>Humidty: ${dayOneHum}</li>`));
-
         }})};
-        //     // Populating the five-day forecast: Day 1
-        //     let dayOneTemp = data.days[1].temp;
-        //     let dayOneHum = data.days[1].humidity;
-        //     let dayOneWind = data.days[1].windspeed;
-        //     let dayOneCondEl = $('<li></li>');
-        //     let dayOneConditions = data.days[1].conditions;
-        //     let dayOneDate = moment().add(1, 'day').format('MM-DD-YY');
-                
-        //         if (dayOneConditions === 'Clear') {
-        //             dayOneCondEl.text('🔆')
-        //         } else if (dayOneConditions === 'Partially cloudy') {
-        //             dayOneCondEl.text('🌤')
-        //         } else if (dayOneConditions === 'Rain, Partially cloudy') {
-        //             dayOneCondEl.text('🌦')
-        //         } else if (dayOneConditions === 'Rain') {
-        //             dayOneCondEl.text('🌧')
-        //         } else if (dayOneConditions === 'Snow') {
-        //             dayOneCondEl.text('🌨')
-        //         } else if (dayOneConditions === 'Thunderstorm') {
-        //             dayOneCondEl.text('⛈')
-        //         } else {
-        //             dayOneCondEl.text('Conditions Unknown')
-        //         };
-        //     dayOne.append($(`<li id="date">${dayOneDate}</li>`));
-        //     dayOne.append(dayOneCondEl);
-        //     dayOne.append($(`<li>Temp: ${dayOneTemp}</li>`));
-        //     dayOne.append($(`<li>Windspeed: ${dayOneWind}</li>`));
-        //     dayOne.append($(`<li>Humidty: ${dayOneHum}</li>`));
-
-        //      // Populating the five-day forecast: Day 2
-        //     let dayTwoTemp = data.days[2].temp;
-        //     let dayTwoHum = data.days[2].humidity;
-        //     let dayTwoWind = data.days[2].windspeed;
-        //     let dayTwoCondEl =$('<li></li>');
-        //     let dayTwoConditions = data.days[1].conditions;
-        //     let dayTwoDate = moment().add(2, 'days').format('MM-DD-YY')
-                
-        //         if (dayTwoConditions === 'Clear') {
-        //             dayTwoCondEl.text('🔆')
-        //         } else if (dayTwoConditions === 'Partially cloudy') {
-        //             dayTwoCondEl.text('🌤')
-        //         } else if (dayTwoConditions === 'Rain, Partially cloudy') {
-        //             dayTwoCondEl.text('🌦')
-        //         } else if (dayTwoConditions === 'Rain') {
-        //             dayTwoCondEl.text('🌧')
-        //         } else if (dayTwoConditions === 'Snow') {
-        //             dayTwoCondEl.text('🌨')
-        //         } else if (dayTwoConditions === 'Thunderstorm') {
-        //             dayTwoCondEl.text('⛈')
-        //         } else {
-        //             dayTwoCondEl.text('Conditions Unknown')
-        //         };
-
-        //     dayTwo.append($(`<li id="date">${dayTwoDate}</li>`));
-        //     dayTwo.append(dayTwoCondEl);
-        //     dayTwo.append($(`<li>Temp: ${dayTwoTemp}</li>`));
-        //     dayTwo.append($(`<li>Windspeed: ${dayTwoWind}</li>`));
-        //     dayTwo.append($(`<li>Humidty: ${dayTwoHum}</li>`));
-
-        //       // Populating the five-day forecast: Day 3
-        //     let dayThreeTemp = data.days[3].temp;
-        //     let dayThreeHum = data.days[3].humidity;
-        //     let dayThreeWind = data.days[3].windspeed;
-        //     let dayThreeCondEl =$('<li></li>');
-        //     let dayThreeConditions = data.days[3].conditions;
-        //     let dayThreeDate = moment().add(3, 'days').format('MM-DD-YY');
-                
-        //         if (dayThreeConditions === 'Clear') {
-        //             dayThreeCondEl.text('🔆')
-        //         } else if (dayThreeConditions === 'Partially cloudy') {
-        //             dayThreeCondEl.text('🌤')
-        //         } else if (dayThreeConditions === 'Rain, Partially cloudy') {
-        //             dayThreeCondEl.text('🌦')
-        //         } else if (dayThreeConditions === 'Rain') {
-        //             dayThreeCondEl.text('🌧')
-        //         } else if (dayThreeConditions === 'Snow') {
-        //             dayThreeCondEl.text('🌨')
-        //         } else if (dayThreeConditions === 'Thunderstorm') {
-        //             dayThreeCondEl.text('⛈')
-        //         } else {
-        //             dayThreeCondEl.text('Conditions Unknown')
-        //         };
-
-        //     dayThree.append($(`<li id="date">${dayThreeDate}</li>`));
-        //     dayThree.append(dayThreeCondEl);
-        //     dayThree.append($(`<li>Temp: ${dayThreeTemp}</li>`));
-        //     dayThree.append($(`<li>Windspeed: ${dayThreeWind}</li>`));
-        //     dayThree.append($(`<li>Humidty: ${dayThreeHum}</li>`));
-
-        //     // Populating the five-day forecast: Day 4
-        //     let dayFourTemp = data.days[4].temp;
-        //     let dayFourHum = data.days[4].humidity;
-        //     let dayFourWind = data.days[4].windspeed;
-        //     let dayFourCondEl =$('<li></li>');
-        //     let dayFourConditions = data.days[4].conditions;
-        //     let dayFourDate = moment().add(4, 'days').format('MM-DD-YY')
-                
-        //         if (dayFourConditions === 'Clear') {
-        //             dayFourCondEl.text('🔆')
-        //         } else if (dayFourConditions === 'Partially cloudy') {
-        //             dayFourCondEl.text('🌤')
-        //         } else if (dayFourConditions === 'Rain, Partially cloudy') {
-        //             dayFourCondEl.text('🌦')
-        //         } else if (dayFourConditions === 'Rain') {
-        //             dayFourCondEl.text('🌧')
-        //         } else if (dayFourConditions === 'Snow') {
-        //             dayFourCondEl.text('🌨')
-        //         } else if (dayFourConditions === 'Thunderstorm') {
-        //             dayFourCondEl.text('⛈')
-        //         } else {
-        //             dayFourCondEl.text('Conditions Unknown')
-        //         };
-
-        //     dayFour.append($(`<li id="date">${dayFourDate}</li>`));
-        //     dayFour.append(dayFourCondEl);
-        //     dayFour.append($(`<li>Temp: ${dayFourTemp}</li>`));
-        //     dayFour.append($(`<li>Windspeed: ${dayFourWind}</li>`));
-        //     dayFour.append($(`<li>Humidty: ${dayFourHum}</li>`));
-
-        //     // Populating the five-day forecast: Day 5
-        //     let dayFiveTemp = data.days[5].temp;
-        //     let dayFiveHum = data.days[5].humidity;
-        //     let dayFiveWind = data.days[5].windspeed;
-        //     let dayFiveCondEl =$('<li></li>');
-        //     let dayFiveConditions = data.days[5].conditions;
-        //     let dayFiveDate = moment().add(5, 'days').format('MM-DD-YY')
-                
-        //         if (dayFiveConditions === 'Clear') {
-        //             dayFiveCondEl.text('🔆')
-        //         } else if (dayFiveConditions === 'Partially cloudy') {
-        //             dayFiveCondEl.text('🌤')
-        //         } else if (dayFiveConditions === 'Rain, Partially cloudy') {
-        //             dayFiveCondEl.text('🌦')
-        //         } else if (dayFiveConditions === 'Rain') {
-        //             dayFiveCondEl.text('🌧')
-        //         } else if (dayFiveConditions === 'Snow') {
-        //             dayFiveCondEl.text('🌨')
-        //         } else if (dayFiveConditions === 'Thunderstorm') {
-        //             dayFiveCondEl.text('⛈')
-        //         } else {
-        //             dayFiveCondEl.text('Conditions Unknown')
-        //         };
-
-        //     dayFive.append($(`<li id="date">${dayFiveDate}</li>`));
-        //     dayFive.append(dayFiveCondEl);
-        //     dayFive.append($(`<li>Temp: ${dayFiveTemp}</li>`));
-        //     dayFive.append($(`<li>Windspeed: ${dayFiveWind}</li>`));
-        //     dayFive.append($(`<li>Humidty: ${dayFiveHum}</li>`));
-        // })
