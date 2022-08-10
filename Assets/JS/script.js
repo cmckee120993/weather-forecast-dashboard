@@ -1,8 +1,11 @@
 // Submit button and user input 
 let submit = $('.btn');
+let cityHistoryBtn =$('.city-history');
 
 // Five-day forecast div used to clear old data upon a new search
 let forecastDiv =$('.five-day');
+
+var currentCity = '';
 
 // Search button for query
 submit.on('click', function(event) {
@@ -15,21 +18,23 @@ submit.on('click', function(event) {
     localStorage.setItem('currentCity', userInput);
     $(this).siblings('#city').val('');
     let cityHistory = $('.search-history');
-
+    searchHistory();
     weatherConditions();
 });
-   
 
+ // Creating the search history list
+ function searchHistory() {
+ let currentCity = localStorage.getItem('currentCity');
+ $('.search-history').append($(`<li class="city-history">${currentCity}</li>`));
+ console.log(cityHistoryBtn.text());
+ };
 
+// Taking localStorage to a geocode API for longitude/lattitude through one function
 
-    // Taking localStorage to a geocode API for longitude/lattitude
+function weatherConditions() {
 
-    function weatherConditions() {
-   
-    // Creating the search history list
     let currentCity = localStorage.getItem('currentCity');
-    $('.search-history').append($(`<li id='city-history'>${currentCity}</li>`));
-   
+    
     // API URL
     let currentAPI = 'G27KXPH8JLYLLD4AT9EQQCZ9K'
     let currentURL = 'https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/'+ currentCity +'?unitGroup=us&key=' + currentAPI +'&contentType=json';
@@ -39,7 +44,6 @@ submit.on('click', function(event) {
     .then(function(response) {
         return response.json();})
         .then(function(data) {
-            console.log(data);
 
             // Adding loc/date and dates to all forecast lists
             let currentCityInfo = $('.city-current-date');
@@ -76,34 +80,33 @@ submit.on('click', function(event) {
             };
 
         // Setting five-day forecast off of arrays
-        for (var i=1; i<=5; i++) {
-            let dayTemp = data.days[i].temp;
-            let dayHum = data.days[i].humidity;
-            let dayWind = data.days[i].windspeed;
-            let dayConditions = data.days[i].conditions;
-            let dayConditionsEl = $('<li></li>');
-            let dayDate = moment().add(1, 'day').format('MM/DD/YY');
+            for (var i=1; i<=5; i++) {
+                let dayTemp = data.days[i].temp;
+                let dayHum = data.days[i].humidity;
+                let dayWind = data.days[i].windspeed;
+                let dayConditions = data.days[i].conditions;
+                let dayConditionsEl = $('<li></li>');
+                let dayDate = moment().add(i, 'days').format('MM/DD/YY');
             
-            if (dayConditions === 'Clear') {
-                dayConditionsEl.text('🔆')
-                } else if (dayConditions === 'Partially cloudy') {
-                    dayConditionsEl.text('🌤');
-                } else if (dayConditions === 'Rain, Partially cloudy') {
-                    dayConditionsEl.text('🌦');
-                } else if (dayConditions === 'Rain') {
-                    dayConditionsEl.text('🌧');
-                } else if (dayConditions === 'Snow') {
-                    dayConditionsEl.text('🌨');
-                } else if (dayConditions === 'Thunderstorm') {
-                    dayConditionsEl.text('⛈');
-                } else {
-                    dayConditionsEl.text('Conditions Unknown');
+                if (dayConditions === 'Clear') {
+                    dayConditionsEl.text('🔆')
+                    } else if (dayConditions === 'Partially cloudy') {
+                        dayConditionsEl.text('🌤');
+                    } else if (dayConditions === 'Rain, Partially cloudy') {
+                        dayConditionsEl.text('🌦');
+                    } else if (dayConditions === 'Rain') {
+                        dayConditionsEl.text('🌧');
+                    } else if (dayConditions === 'Snow') {
+                        dayConditionsEl.text('🌨');
+                    } else if (dayConditions === 'Thunderstorm') {
+                        dayConditionsEl.text('⛈');
+                    } else {
+                        dayConditionsEl.text('Conditions Unknown');
                 };
 
-                console.log(dayConditionsEl);
             
-            // Creating HTML list for array
-            let fiveDayForecast = $(`<div id='day'>
+                // Creating HTML list for array
+                let fiveDayForecast = $(`<div id='day'>
                     <ul>
                         <li>${dayDate}</li>
                         ${dayConditionsEl[0].innerHTML}
@@ -112,6 +115,14 @@ submit.on('click', function(event) {
                         <li>Windspeed: ${dayWind}</li>
                     </ul>`);
 
-            // Accessing div and appending forecast to HTML
-            forecastDiv.append(fiveDayForecast);
-        }})};
+                // Accessing div and appending forecast to HTML
+                forecastDiv.append(fiveDayForecast);
+            }
+    }
+)
+};
+
+// Using search history as a button
+cityHistoryBtn.on('click', function(event){
+    console.log('yay');
+})
