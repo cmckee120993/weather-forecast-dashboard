@@ -44,7 +44,7 @@ function weatherConditions() {
     .then(function(response) {
         return response.json();})
         .then(function(data) {
-
+            console.log(data);
             // Adding loc/date and dates to all forecast lists
             let currentCityInfo = $('.city-current-date');
             let todayDate = moment().format('MM-DD-YY');
@@ -67,9 +67,9 @@ function weatherConditions() {
                 conditionsEl.text('🔆')
             } else if (data.currentConditions.conditions === 'Partially cloudy') {
                 conditionsEl.text('🌤')
-            } else if (data.currentConditions.conditions === 'Rain, Partially cloudy') {
+            } else if (data.currentConditions.conditions === 'Rain, Partially cloudy' || 'Rain, Overcast') {
                 conditionsEl.text('🌦')
-            } else if (data.currentConditions.conditions === 'Rain') {
+            } else if (data.currentConditions.conditions === 'Rain' ) {
                 conditionsEl.text('🌧')
             } else if (data.currentConditions.conditions === 'Snow') {
                 conditionsEl.text('🌨')
@@ -92,7 +92,7 @@ function weatherConditions() {
                     dayConditionsEl.text('🔆')
                     } else if (dayConditions === 'Partially cloudy') {
                         dayConditionsEl.text('🌤');
-                    } else if (dayConditions === 'Rain, Partially cloudy') {
+                    } else if (dayConditions === 'Rain, Partially cloudy' || 'Rain, Overcast') {
                         dayConditionsEl.text('🌦');
                     } else if (dayConditions === 'Rain') {
                         dayConditionsEl.text('🌧');
