@@ -1,6 +1,6 @@
 // Submit button and user input 
 let submit = $('.btn');
-let cityHistoryBtn =$('.search-history');
+let cityHistoryBtn =$('.city-history');
 
 // Five-day forecast div used to clear old data upon a new search
 let forecastDiv =$('.five-day');
@@ -15,27 +15,18 @@ submit.on('click', function(event) {
 
     // Getting user input and sending it to storage
     let userInput = $(this).siblings('#city').val();
-    let cityArray = [];
-    cityArray.push(userInput);
-    localStorage.setItem('cityArrayStor', cityArray);
+    localStorage.setItem('currentCity', userInput);
     $(this).siblings('#city').val('');
+    let cityHistory = $('.search-history');
     searchHistory();
     weatherConditions();
 });
 
  // Creating the search history list
  function searchHistory() {
- let cityHistory = localStorage.getItem('cityArrayStor');
- console.log(cityHistory);
-
- for (var i=0; i<cityHistory.length; i++) {
- $('.search-history').append($(cityHistory[i]));
- }
- // Using search history as a button
-cityHistoryBtn.on('click', function(event){
-    currentCity = cityHistoryBtn.text();
-    weatherConditions();
-})
+ let currentCity = localStorage.getItem('currentCity');
+ $('.search-history').append($(`<li class="city-history">${currentCity}</li>`));
+ console.log(cityHistoryBtn.text());
  };
 
 // Taking localStorage to a geocode API for longitude/lattitude through one function
@@ -53,7 +44,7 @@ function weatherConditions() {
     .then(function(response) {
         return response.json();})
         .then(function(data) {
-
+            console.log(data);
             // Adding loc/date and dates to all forecast lists
             let currentCityInfo = $('.city-current-date');
             let todayDate = moment().format('MM-DD-YY');
@@ -76,9 +67,9 @@ function weatherConditions() {
                 conditionsEl.text('🔆')
             } else if (data.currentConditions.conditions === 'Partially cloudy') {
                 conditionsEl.text('🌤')
-            } else if (data.currentConditions.conditions === 'Rain, Partially cloudy') {
+            } else if (data.currentConditions.conditions === 'Rain, Partially cloudy' || 'Rain, Overcast') {
                 conditionsEl.text('🌦')
-            } else if (data.currentConditions.conditions === 'Rain') {
+            } else if (data.currentConditions.conditions === 'Rain' ) {
                 conditionsEl.text('🌧')
             } else if (data.currentConditions.conditions === 'Snow') {
                 conditionsEl.text('🌨')
@@ -101,7 +92,7 @@ function weatherConditions() {
                     dayConditionsEl.text('🔆')
                     } else if (dayConditions === 'Partially cloudy') {
                         dayConditionsEl.text('🌤');
-                    } else if (dayConditions === 'Rain, Partially cloudy') {
+                    } else if (dayConditions === 'Rain, Partially cloudy' || 'Rain, Overcast') {
                         dayConditionsEl.text('🌦');
                     } else if (dayConditions === 'Rain') {
                         dayConditionsEl.text('🌧');
@@ -131,3 +122,7 @@ function weatherConditions() {
 )
 };
 
+// Using search history as a button
+cityHistoryBtn.on('click', function(event){
+    console.log('yay');
+})
