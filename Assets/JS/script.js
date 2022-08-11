@@ -1,11 +1,11 @@
 // Submit button and user input 
 let submit = $('.btn');
-let cityHistoryBtn =$('.city-history');
+let cityHistoryBtn =$('.search-history');
 
 // Five-day forecast div used to clear old data upon a new search
 let forecastDiv =$('.five-day');
 
-var currentCity = '';
+var currentCity = [];
 
 // Search button for query
 submit.on('click', function(event) {
@@ -15,7 +15,8 @@ submit.on('click', function(event) {
 
     // Getting user input and sending it to storage
     let userInput = $(this).siblings('#city').val();
-    localStorage.setItem('currentCity', userInput);
+    currentCity.push(userInput);
+    localStorage.setItem('currentCityArray', JSON.stringify(currentCity));
     $(this).siblings('#city').val('');
     let cityHistory = $('.search-history');
     searchHistory();
@@ -24,9 +25,13 @@ submit.on('click', function(event) {
 
  // Creating the search history list
  function searchHistory() {
- let currentCity = localStorage.getItem('currentCity');
- $('.search-history').append($(`<li class="city-history">${currentCity}</li>`));
- console.log(cityHistoryBtn.text());
+ let currentCityArrayEl  = localStorage.getItem('currentCityArray');
+ console.log(currentCityArrayEl);
+
+ for (var i=0; i<currentCityArrayEl; i++){
+
+ $('.search-history').append($(`<li class="city-history">${currentCityArrayEl[i]}</li>`));
+ }
  };
 
 // Taking localStorage to a geocode API for longitude/lattitude through one function
@@ -47,7 +52,7 @@ function weatherConditions() {
             console.log(data);
             // Adding loc/date and dates to all forecast lists
             let currentCityInfo = $('.city-current-date');
-            let todayDate = moment().format('MM-DD-YY');
+            let todayDate = moment().format('MM/DD/YY');
 
             currentCityInfo.text(`${currentCity}: ${todayDate}`);
 
@@ -124,5 +129,5 @@ function weatherConditions() {
 
 // Using search history as a button
 cityHistoryBtn.on('click', function(event){
-    console.log('yay');
+   console.log(cityHistoryBtn.text());
 })
