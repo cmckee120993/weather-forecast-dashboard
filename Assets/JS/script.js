@@ -5,6 +5,7 @@ let cityHistoryBtn =$('.search-history');
 // Five-day forecast div used to clear old data upon a new search
 let forecastDiv =$('.five-day');
 
+var searchCity ='';
 var currentCity = [];
 
 // Search button for query
@@ -15,6 +16,9 @@ submit.on('click', function(event) {
 
     // Getting user input and sending it to storage
     let userInput = $(this).siblings('#city').val();
+    let searchCity = $(this).siblings('#city').val();
+
+    localStorage.setItem('searchCityStor', searchCity);
     currentCity.push(userInput);
     localStorage.setItem('currentCityArray', JSON.stringify(currentCity));
     $(this).siblings('#city').val('');
@@ -38,7 +42,7 @@ submit.on('click', function(event) {
 
 function weatherConditions() {
 
-    let currentCity = localStorage.getItem('currentCity');
+    let currentCity = localStorage.getItem('searchCityStor');
     
     // API URL
     let currentAPI = 'G27KXPH8JLYLLD4AT9EQQCZ9K'
