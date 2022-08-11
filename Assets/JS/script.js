@@ -1,6 +1,7 @@
 // Submit button and user input 
 let submit = $('.btn');
-let cityHistoryBtn =$('.search-history');
+let cityHistoryDiv =$('.search-history-div');
+let cityHistory =$('.search-history')
 
 // Five-day forecast div used to clear old data upon a new search
 let forecastDiv =$('.five-day');
@@ -29,14 +30,12 @@ submit.on('click', function(event) {
 
  // Creating the search history list
  function searchHistory() {
- let currentCityArrayEl  = localStorage.getItem('currentCityArray');
- console.log(currentCityArrayEl);
+    
+ let currentCityArrayEl  = JSON.parse(localStorage.getItem('currentCityArray'));
 
- for (var i=0; i<currentCityArrayEl; i++){
-
- $('.search-history').append($(`<li class="city-history">${currentCityArrayEl[i]}</li>`));
- }
- };
+ for (var i=0; i<currentCityArrayEl.length; i++){
+        $('.search-history').append($(`<li class="city-history">${currentCityArrayEl[i]}</li>`));
+ }};
 
 // Taking localStorage to a geocode API for longitude/lattitude through one function
 
@@ -130,8 +129,3 @@ function weatherConditions() {
     }
 )
 };
-
-// Using search history as a button
-cityHistoryBtn.on('click', function(event){
-   console.log(cityHistoryBtn.text());
-})
