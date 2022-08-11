@@ -34,8 +34,22 @@ submit.on('click', function(event) {
  let currentCityArrayEl  = JSON.parse(localStorage.getItem('currentCityArray'));
 
  for (var i=0; i<currentCityArrayEl.length; i++){
-        $('.search-history').append($(`<li class="city-history">${currentCityArrayEl[i]}</li>`));
- }};
+        cityHistoryDiv.append($(`<button>${currentCityArrayEl[i]}</button>`));
+ }
+
+//  let btnSearch = function(event){
+//     let btn = event.currentTarget;
+//     let btnCity = btn.text();
+
+//     console.log(btnCity);
+//  }
+ let cityBtn = $('button');
+ 
+ cityBtn.on('click', function(event){
+    let btnCity = $(this).text();
+    console.log(btnCity);
+ });
+};
 
 // Taking localStorage to a geocode API for longitude/lattitude through one function
 
@@ -129,3 +143,5 @@ function weatherConditions() {
     }
 )
 };
+
+// Create buttons out of city search history
