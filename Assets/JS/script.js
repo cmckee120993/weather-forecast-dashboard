@@ -47,14 +47,15 @@ submit.on('click', function(event) {
  
  cityBtn.on('click', function(event){
     let btnCity = $(this).text();
-    console.log(btnCity);
+    localStorage.setItem('searchCityStor', btnCity);
+    weatherConditions();
  });
 };
 
 // Taking localStorage to a geocode API for longitude/lattitude through one function
 
 function weatherConditions() {
-
+    forecastDiv.empty();
     let currentCity = localStorage.getItem('searchCityStor');
     
     // API URL
