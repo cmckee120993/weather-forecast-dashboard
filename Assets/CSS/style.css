@@ -1,3 +1,53 @@
 * {
-    outline: dashed red;
+    background-color: #434343;
+    font-family:Georgia, 'Times New Roman', Times, serif;
+}
+
+.jumbotron {
+color: white;
+text-align: center;
+}
+
+.title {
+    font-size: 50px;
+}
+
+button, .btn {
+    color: white;
+    background-image:radial-gradient(#720070, #3B003A);
+    padding: 8px;
+    margin: 3px;
+    font-size: 25px;
+}
+
+
+h2 {
+    color: white;
+    font-size: 30px;
+    text-align: center;
+}
+
+ul {
+    background-image:radial-gradient(#720070, #3B003A);
+    color: white;
+    list-style: none;
+    font-size: 25px;
+}
+
+li {
+    background-color: transparent;
+    padding: 3px;
+    margin-left: 10px;
+    margin-bottom: 10px;
+    font-size: 25px;
+}
+
+label {
+    color: white;
+    text-align: center;
+    font-size: 25px;
+}
+
+.five-day {
+    float: right;
 }

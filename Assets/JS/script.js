@@ -123,7 +123,7 @@ function weatherConditions() {
 
             
                 // Creating HTML list for array
-                let fiveDayForecast = $(`<div id='day'>
+                let fiveDayForecast = $(`
                     <ul>
                         <li>${dayDate}</li>
                         ${dayConditionsEl[0].innerHTML}
@@ -131,7 +131,7 @@ function weatherConditions() {
                         <li>Humidity: ${dayHum}</li>
                         <li>Windspeed: ${dayWind}</li>
                     </ul>`);
-
+                fiveDayForecast.attr('class', 'col-3 m-1');
                 // Accessing div and appending forecast to HTML
                 forecastDiv.append(fiveDayForecast);
             }
