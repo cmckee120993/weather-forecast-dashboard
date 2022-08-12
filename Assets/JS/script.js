@@ -77,7 +77,16 @@ function weatherConditions() {
             tempEl.text('Temp: '+ data.currentConditions.temp);
             windEl.text('Wind: '+ data.currentConditions.windspeed);
             humidEl.text('Humidity: '+ data.currentConditions.humidity);
-            indexEl.text('UV Index: '+ data.currentConditions.uvindex);
+            // indexEl.text('UV Index: '+ data.currentConditions.uvindex);
+
+            if (data.currentConditions.uvindex <= 2) {
+                indexEl.text(`UV Index: ${data.currentConditions.uvindex} 🟩`);
+            } else if (data.currentConditions.uvindex >=3 && data.currentConditions.uvindex <= 7){
+                indexEl.text(`UV Index: ${data.currentConditions.uvindex} 🟨`);
+            } else if (data.currentConditions.uvindex > 7) {
+                indexEl.text(`UV Index: ${data.currentConditions.uvindex} 🟥`);
+            };
+console.log(indexEl.text)
 
             if (data.currentConditions.conditions === 'Clear') {
                 conditionsEl.text('🔆')
