@@ -1,7 +1,6 @@
 // Submit button and user input 
 let submit = $('.btn');
 let cityHistoryDiv =$('.search-history-div');
-let cityHistory =$('.search-history')
 
 // Five-day forecast div used to clear old data upon a new search
 let forecastDiv =$('.five-day');
@@ -14,6 +13,7 @@ submit.on('click', function(event) {
 
     // Clearing previous search five-day forecast (if any)
     forecastDiv.empty();
+    cityHistoryDiv.empty();
 
     // Getting user input and sending it to storage
     let userInput = $(this).siblings('#city').val();
@@ -35,22 +35,16 @@ submit.on('click', function(event) {
 
  for (var i=0; i<currentCityArrayEl.length; i++){
         cityHistoryDiv.append($(`<button>${currentCityArrayEl[i]}</button>`));
- }
 
-//  let btnSearch = function(event){
-//     let btn = event.currentTarget;
-//     let btnCity = btn.text();
-
-//     console.log(btnCity);
-//  }
  let cityBtn = $('button');
  
  cityBtn.on('click', function(event){
     let btnCity = $(this).text();
     localStorage.setItem('searchCityStor', btnCity);
     weatherConditions();
+    forecastDiv.empty();
  });
-};
+};};
 
 // Taking localStorage to a geocode API for longitude/lattitude through one function
 
