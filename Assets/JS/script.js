@@ -1,21 +1,27 @@
 // Submit button and user input 
 let submit = $('.btn');
-let cityHistoryBtn =$('.city-history');
+let cityHistoryDiv =$('.search-history-div');
 
 // Five-day forecast div used to clear old data upon a new search
 let forecastDiv =$('.five-day');
 
-var currentCity = '';
+var searchCity ='';
+var currentCity = [];
 
 // Search button for query
 submit.on('click', function(event) {
 
     // Clearing previous search five-day forecast (if any)
     forecastDiv.empty();
+    cityHistoryDiv.empty();
 
     // Getting user input and sending it to storage
     let userInput = $(this).siblings('#city').val();
-    localStorage.setItem('currentCity', userInput);
+    let searchCity = $(this).siblings('#city').val();
+
+    localStorage.setItem('searchCityStor', searchCity);
+    currentCity.push(userInput);
+    localStorage.setItem('currentCityArray', JSON.stringify(currentCity));
     $(this).siblings('#city').val('');
     let cityHistory = $('.search-history');
     searchHistory();
@@ -24,16 +30,27 @@ submit.on('click', function(event) {
 
  // Creating the search history list
  function searchHistory() {
- let currentCity = localStorage.getItem('currentCity');
- $('.search-history').append($(`<li class="city-history">${currentCity}</li>`));
- console.log(cityHistoryBtn.text());
- };
+    
+ let currentCityArrayEl  = JSON.parse(localStorage.getItem('currentCityArray'));
+
+ for (var i=0; i<currentCityArrayEl.length; i++){
+        cityHistoryDiv.append($(`<button>${currentCityArrayEl[i]}</button>`));
+
+ let cityBtn = $('button');
+ 
+ cityBtn.on('click', function(event){
+    let btnCity = $(this).text();
+    localStorage.setItem('searchCityStor', btnCity);
+    weatherConditions();
+    forecastDiv.empty();
+ });
+};};
 
 // Taking localStorage to a geocode API for longitude/lattitude through one function
 
 function weatherConditions() {
-
-    let currentCity = localStorage.getItem('currentCity');
+    forecastDiv.empty();
+    let currentCity = localStorage.getItem('searchCityStor');
     
     // API URL
     let currentAPI = 'G27KXPH8JLYLLD4AT9EQQCZ9K'
@@ -47,7 +64,7 @@ function weatherConditions() {
             console.log(data);
             // Adding loc/date and dates to all forecast lists
             let currentCityInfo = $('.city-current-date');
-            let todayDate = moment().format('MM-DD-YY');
+            let todayDate = moment().format('MM/DD/YY');
 
             currentCityInfo.text(`${currentCity}: ${todayDate}`);
 
@@ -122,7 +139,4 @@ function weatherConditions() {
 )
 };
 
-// Using search history as a button
-cityHistoryBtn.on('click', function(event){
-    console.log('yay');
-})
+// Create buttons out of city search history
