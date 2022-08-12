@@ -42,14 +42,13 @@ submit.on('click', function(event) {
     let btnCity = $(this).text();
     localStorage.setItem('searchCityStor', btnCity);
     weatherConditions();
-    forecastDiv.empty();
  });
 };};
 
 // Taking localStorage to a geocode API for longitude/lattitude through one function
 
 function weatherConditions() {
-    forecastDiv.empty();
+    
     let currentCity = localStorage.getItem('searchCityStor');
     
     // API URL
@@ -97,6 +96,7 @@ function weatherConditions() {
             };
 
         // Setting five-day forecast off of arrays
+        forecastDiv.empty();
             for (var i=1; i<=5; i++) {
                 let dayTemp = data.days[i].temp;
                 let dayHum = data.days[i].humidity;
