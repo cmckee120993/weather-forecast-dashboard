@@ -8,6 +8,8 @@ let forecastDiv =$('.five-day');
 var searchCity ='';
 var currentCity = [];
 
+searchHistory();
+
 // Search button for query
 submit.on('click', function(event) {
 
