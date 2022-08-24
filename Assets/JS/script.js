@@ -35,6 +35,7 @@ submit.on('click', function(event) {
     
  let currentCityArrayEl  = JSON.parse(localStorage.getItem('currentCityArray'));
 
+ if (currentCityArrayEl !== null){
  for (var i=0; i<currentCityArrayEl.length; i++){
         cityHistoryDiv.append($(`<button>${currentCityArrayEl[i]}</button>`));
 
@@ -45,7 +46,7 @@ submit.on('click', function(event) {
     localStorage.setItem('searchCityStor', btnCity);
     weatherConditions();
  });
-};};
+};};};
 
 // Taking localStorage to a geocode API for longitude/lattitude through one function
 
